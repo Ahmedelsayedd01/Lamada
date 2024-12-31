@@ -46,8 +46,8 @@ const EditProductPage = () => {
        const [discounts, setDiscounts] = useState([])
        const [taxes, setTaxes] = useState([])
 
-       const [itemTypes, setItemTypes] = useState([{ id: '', name: 'Selected Item Type' }, , { id: '', name: 'online' }, { id: '', name: 'offline' }, { id: '', name: 'all' }])
-       const [stockTypes, setStockTypes] = useState([{ id: '', name: 'Selected Stock Type' }, , { id: '', name: 'unlimited' }, { id: '', name: 'daily' }, { id: '', name: 'fixed' }])
+  const [itemTypes, setItemTypes] = useState([{ id: '', name: 'Selected Item Type' }, , { id: 'online', name: 'online' }, { id: 'offline', name: 'offline' }, { id: 'all', name: 'all' }])
+  const [stockTypes, setStockTypes] = useState([{ id: '', name: 'Selected Stock Type' }, , { id: 'unlimited', name: 'unlimited' }, { id: 'daily', name: 'daily' }, { id: 'fixed', name: 'fixed' }])
 
        /*  */
        const [productEdit, setProductEdit] = useState([]);
