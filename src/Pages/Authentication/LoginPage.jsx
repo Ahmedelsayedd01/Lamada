@@ -43,7 +43,7 @@ const LoginPage = () => {
       dispatch(setUser(response.data.admin))
 
 
-      // auth.login(response.data.admin)
+      auth.login(response.data.admin)
 
       navigate("/dashboard", { replace: true });
     }
