@@ -767,11 +767,11 @@ const EditProductPage = () => {
                      (desc) => desc && desc.tranlation_id && desc.product_description && desc.tranlation_name
               );
 
-              if (validDescriptionNames.length === 0) {
-                     auth.toastError('Please enter a description name');
-                     console.log('descriptionNames', validDescriptionNames);
-                     return;
-              }
+              // if (validDescriptionNames.length === 0) {
+              //        auth.toastError('Please enter a description name');
+              //        console.log('descriptionNames', validDescriptionNames);
+              //        return;
+              // }
 
               // if (validDescriptionNames.length !== taps.length) {
               //        auth.toastError('Please enter all description names');
