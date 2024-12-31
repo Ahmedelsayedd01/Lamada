@@ -50,8 +50,6 @@ const Navbar = () => {
               navigate("/", { replace: true });
        }
 
-
-
        return (
               <>
                      <nav className="flex items-center justify-between py-2 px-4 gap-x-4 border-b-2">
@@ -69,7 +67,7 @@ const Navbar = () => {
                                    </div>
                                    {/* Name Admin */}
                                    <div className="sm:w-10/12">
-                                          <span className='w-full text-2xl text-left text-mainColor font-bold'>Hello, {auth.user?.name || "Ahmed"}</span>
+                                          <span className='w-full text-2xl text-left text-mainColor font-bold'>Hello, {auth.user?.firstName}</span>
                                    </div>
                             </div>
                             <div className='sm:hidden lg:flex w-5/12'>
