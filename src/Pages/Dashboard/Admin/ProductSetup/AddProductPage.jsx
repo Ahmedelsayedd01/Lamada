@@ -578,6 +578,9 @@ const AddProductPage = () => {
   useEffect(() => { console.log('descriptionNames', descriptionNames) }, [descriptionNames])
   /* Reset Details Product */
   const handleReset = () => {
+    console.log('productNames', productNames)
+    console.log('descriptionNames', descriptionNames)
+    
     setCurrentProductNamesTap(0)
     setCurrentExcludeNamesTap(0)
     setCurrentExtraNamesTap(0)
@@ -697,11 +700,11 @@ const AddProductPage = () => {
     }
 
 
-    if (productExclude.length === 0) {
-      auth.toastError('please Enter Exclude Name')
-      console.log('productExclude', productExclude)
-      return;
-    }
+    // if (productExclude.length === 0) {
+    //   auth.toastError('please Enter Exclude Name')
+    //   console.log('productExclude', productExclude)
+    //   return;
+    // }
 
     // for (const ex of productExclude) {
     //   for (const name of ex.names) {

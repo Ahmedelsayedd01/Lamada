@@ -725,11 +725,12 @@ const EditProductPage = () => {
               }
 
 
-              if (productExclude.length === 0) {
-                     auth.toastError('please Enter Exclude Name')
-                     console.log('productExclude', productExclude)
-                     return;
-              }
+              // if (productExclude.length === 0) {
+              //        auth.toastError('please Enter Exclude Name')
+              //        console.log('productExclude', productExclude)
+              //        return;
+              // }
+
               // for (const ex of productExclude) {
               //        for (const name of ex.names) {
               //               if (!name.exclude_name || name.exclude_name.trim() === '') {
