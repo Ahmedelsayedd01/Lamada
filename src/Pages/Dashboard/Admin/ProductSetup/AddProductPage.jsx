@@ -1021,7 +1021,7 @@ const AddProductPage = () => {
                               return updatedDescriptionNames;
                             });
                           }}
-                          placeholder="Product Name"
+                          placeholder="Product Description"
                         />
                       </div>
 
