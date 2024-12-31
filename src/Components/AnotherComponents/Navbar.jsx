@@ -7,7 +7,7 @@ import { IoBagHandleOutline } from 'react-icons/io5';
 import { IoIosArrowDown, IoMdNotificationsOutline } from 'react-icons/io';
 import RedLogo from '../../Assets/Images/RedLogo.jsx';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeCategory, removeUser } from '../../Store/CreateSlices.jsx';
 
 
@@ -17,6 +17,8 @@ const Navbar = () => {
        const dispatch = useDispatch()
        const navigate = useNavigate();
        const dropdownRef = useRef(null)
+
+       const user = useSelector(state => state.user)
 
        const [selectedOption, setSelectedOption] = useState('EN');
        const [open, setOpen] = useState(false);
@@ -44,7 +46,7 @@ const Navbar = () => {
        }, []);
 
        const handleLogout = () => {
-              // auth.logout()
+              auth.logout()
               dispatch(removeUser())
               dispatch(removeCategory())
               navigate("/", { replace: true });
@@ -61,13 +63,13 @@ const Navbar = () => {
                                           {/* <img src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"
                                                  className='min-w-14 max-w-14 min-h-14  max-h-14 p-1 bg-white border-2 border-mainColor rounded-full object-cover object-center'
                                                  alt="Profile" /> */}
-                                          {auth.user?.image ? (<img src={auth.user?.image} className='min-w-14 max-w-14 min-h-14  max-h-14 p-1 bg-white border-2 border-mainColor rounded-full object-cover object-center' alt="Profile" />)
+                                          {user?.image ? (<img src={user?.image} className='min-w-14 max-w-14 min-h-14  max-h-14 p-1 bg-white border-2 border-mainColor rounded-full object-cover object-center' alt="Profile" />)
                                                  : (<RedLogo width={60} height={60} />)}
                                           <span className={`absolute z-10 sm:right-0 lg:-right-0 bg-green-500 rounded-full bottom-1 w-[14px] h-[14px] animate-pulse`}></span>
                                    </div>
                                    {/* Name Admin */}
                                    <div className="sm:w-10/12">
-                                          <span className='w-full text-2xl text-left text-mainColor font-bold'>Hello, {auth.user?.firstName}</span>
+                                          <span className='w-full text-2xl text-left text-mainColor font-bold'>Hello, {user?.name}</span>
                                    </div>
                             </div>
                             <div className='sm:hidden lg:flex w-5/12'>
