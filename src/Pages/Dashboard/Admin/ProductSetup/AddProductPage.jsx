@@ -771,11 +771,14 @@ const AddProductPage = () => {
     formData.append('status', productStatus)
     formData.append('image', productImage)
 
-    const addonIds = selectedAddonsId.map((addon) => addon.id); // Extracts only the IDs
+    if (selectedAddonsId.length > 0) {
 
-    addonIds.forEach((id, indexID) => {
-      formData.append(`addons[${indexID}]`, id); // Appending each ID separately with 'addons[]'
-    });
+      const addonIds = selectedAddonsId.map((addon) => addon.id); // Extracts only the IDs
+
+      addonIds.forEach((id, indexID) => {
+        formData.append(`addons[${indexID}]`, id); // Appending each ID separately with 'addons[]'
+      });
+    }
 
 
 
