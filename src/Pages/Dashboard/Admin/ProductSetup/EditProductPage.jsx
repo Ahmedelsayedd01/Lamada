@@ -46,8 +46,8 @@ const EditProductPage = () => {
        const [discounts, setDiscounts] = useState([])
        const [taxes, setTaxes] = useState([])
 
-  const [itemTypes, setItemTypes] = useState([{ id: '', name: 'Selected Item Type' }, , { id: 'online', name: 'online' }, { id: 'offline', name: 'offline' }, { id: 'all', name: 'all' }])
-  const [stockTypes, setStockTypes] = useState([{ id: '', name: 'Selected Stock Type' }, , { id: 'unlimited', name: 'unlimited' }, { id: 'daily', name: 'daily' }, { id: 'fixed', name: 'fixed' }])
+       const [itemTypes, setItemTypes] = useState([{ id: '', name: 'Selected Item Type' }, , { id: 'online', name: 'online' }, { id: 'offline', name: 'offline' }, { id: 'all', name: 'all' }])
+       const [stockTypes, setStockTypes] = useState([{ id: '', name: 'Selected Stock Type' }, , { id: 'unlimited', name: 'unlimited' }, { id: 'daily', name: 'daily' }, { id: 'fixed', name: 'fixed' }])
 
        /*  */
        const [productEdit, setProductEdit] = useState([]);
@@ -648,6 +648,27 @@ const EditProductPage = () => {
        const handleproductEdit = (e) => {
               e.preventDefault();
 
+              // Filter out any invalid or empty entries in product Names
+              const validProductNames = productNames.filter(
+                     (product) => product && product.tranlation_id && product.product_name && product.tranlation_name
+              );
+
+              if (validProductNames.length === 0) {
+                     auth.toastError('Please enter a product name');
+                     console.log('productNames', validProductNames);
+                     console.log('validProductNames.length', validProductNames.length);
+                     console.log('validProductNames', validProductNames)
+                     return;
+              }
+
+              if (validProductNames.length !== taps.length) {
+                     auth.toastError('Please enter all product names');
+                     console.log('productNames', validProductNames);
+                     console.log('taps.length', taps.length)
+                     console.log('validProductNames', validProductNames)
+                     return;
+              }
+
               // if (productNames.length === 0) {
               //   auth.toastError('please Enter product Name')
               //   console.log('productNames', productNames)
@@ -741,26 +762,7 @@ const EditProductPage = () => {
               //        }
               // }
 
-              // Filter out any invalid or empty entries in product Names
-              const validProductNames = productNames.filter(
-                     (product) => product && product.tranlation_id && product.product_name && product.tranlation_name
-              );
 
-              if (validProductNames.length === 0) {
-                     auth.toastError('Please enter a product name');
-                     console.log('productNames', validProductNames);
-                     console.log('validProductNames.length', validProductNames.length);
-                     console.log('validProductNames', validProductNames)
-                     return;
-              }
-
-              // if (validProductNames.length !== taps.length) {
-              //        auth.toastError('Please enter all product names');
-              //        console.log('productNames', validProductNames);
-              //        console.log('taps.length', taps.length)
-              //        console.log('validProductNames', validProductNames)
-              //        return;
-              // }
 
               // Filter out any invalid or empty entries description Names
               const validDescriptionNames = descriptionNames.filter(
