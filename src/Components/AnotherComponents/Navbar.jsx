@@ -72,10 +72,10 @@ const Navbar = () => {
                                           <span className='w-full text-2xl text-left text-mainColor font-bold'>Hello, {user?.name}</span>
                                    </div>
                             </div>
-                            <div className='sm:hidden lg:flex w-5/12'>
+                            {/* <div className='sm:hidden lg:flex w-8/12'>
                                    <SearchBar bgColor="bg-mainBgColor" pr='4' />
-                            </div>
-                            <div className='sm:hidden xl:flex w-2/12  items-center justify-center gap-x-10'>
+                            </div> */}
+                            {/* <div className='sm:hidden xl:flex w-2/12  items-center justify-center gap-x-10'>
                                    <div className="w-4/12 relative" ref={dropdownRef}>
                                           <button className='flex items-center gap-1 justify-between text-2xl' onClick={handleClickOpen}>
                                                  {selectedOption === 'EN' ? <CiGlobe className='text-mainColor text-2xl' /> : <CiGlobe className='text-mainColor 2xl' />} <span className='flex items-center text-mainColor font-medium'>{selectedOption}<IoIosArrowDown className={`${open ? "rotate-180" : "rotate-0"} mt-1 ml-1 transition-all duration-300`} /></span>
@@ -98,8 +98,8 @@ const Navbar = () => {
                                                  <IoMdNotificationsOutline className='text-mainColor text-3xl' />
                                           </button>
                                    </div>
-                            </div>
-                            <div className="">
+                            </div> */}
+                            <div >
                                    <StaticButton type='button' text={'Logout'} handleClick={handleLogout} />
                             </div>
                      </nav >
