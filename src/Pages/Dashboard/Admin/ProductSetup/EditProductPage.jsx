@@ -182,16 +182,16 @@ const EditProductPage = () => {
                      setSelectedAddonsId(productEdit?.addons || [])
 
                      setSelectedCategoryId(productEdit?.category?.id || '')
-                     setSelectedCategoryState(productEdit?.category?.name || '')
+                     setSelectedCategoryState(productEdit?.category?.name || selectedCategoryState)
 
                      setSelectedSubCategoryId(productEdit?.sub_category?.id || '')
-                     setSelectedSubCategoryState(productEdit?.sub_category?.name || '')
+                     setSelectedSubCategoryState(productEdit?.sub_category?.name || selectedSubCategoryState)
 
                      setSelectedItemTypeName(productEdit?.item_type || '')
-                     setSelectedItemTypeState(productEdit?.item_type || '')
+                     setSelectedItemTypeState(productEdit?.item_type || selectedItemTypeState)
 
-                     setProductPrice(productEdit?.price || '')
-                     setSelectedStockTypeState(productEdit?.stock_type || '')
+                     setProductPrice(productEdit?.price || 0)
+                     setSelectedStockTypeState(productEdit?.stock_type || selectedStockTypeState)
                      setSelectedStockTypeName(productEdit?.stock_type || '')
                      setProductStockNumber(productEdit?.number || '')
 
@@ -199,11 +199,11 @@ const EditProductPage = () => {
                      setProductImageName(productEdit?.image_link || '')
 
                      setSelectedDiscountId(productEdit?.discount?.id || '')
-                     setSelectedDiscountState(productEdit?.discount?.name || '')
+                     setSelectedDiscountState(productEdit?.discount?.name || selectedDiscountState)
                      setSelectedTaxId(productEdit?.tax?.id || '')
-                     setSelectedTaxState(productEdit?.tax?.name || '')
+                     setSelectedTaxState(productEdit?.tax?.name || selectedTaxState)
 
-                     setProductPoint(productEdit?.points || '')
+                     setProductPoint(productEdit?.points || 0)
 
                      setProductStatusFrom(productEdit?.from || '')
                      setProductStatusTo(productEdit?.to || '')
@@ -214,6 +214,8 @@ const EditProductPage = () => {
                      setProductRecommended(productEdit?.recommended || 0)
 
                      // setDescriptionNames(productEdit?.product_descriptions || [])
+                     console.log('productEdit?.points', productEdit?.points)
+                     console.log('productPoint', productPoint)
                      console.log('productId', productId)
                      console.log('dataProductEdit', productEdit)
                      console.log('dataProductEdit', productEdit)
@@ -1681,7 +1683,7 @@ const EditProductPage = () => {
                                                                                                                                                                  <div className="sm:w-full lg:w-[33%] flex flex-col items-start justify-center gap-y-1">
                                                                                                                                                                         <span className="text-xl font-TextFontRegular text-thirdColor">Price:</span>
                                                                                                                                                                         <NumberInput
-                                                                                                                                                                               value={option.price || ''}
+                                                                                                                                                                               value={option?.price || 0}
                                                                                                                                                                                onChange={(e) => {
                                                                                                                                                                                       const updatedValue = e.target.value;
                                                                                                                                                                                       setProductVariations((prevProductVariations) =>
@@ -1707,7 +1709,7 @@ const EditProductPage = () => {
                                                                                                                                                                  <div className="sm:w-full lg:w-[33%] flex flex-col items-start justify-center gap-y-1">
                                                                                                                                                                         <span className="text-xl font-TextFontRegular text-thirdColor">Points:</span>
                                                                                                                                                                         <NumberInput
-                                                                                                                                                                               value={option.points || ''}
+                                                                                                                                                                               value={option?.points || 0}
                                                                                                                                                                                onChange={(e) => {
                                                                                                                                                                                       const updatedValue = e.target.value;
                                                                                                                                                                                       setProductVariations((prevProductVariations) =>
