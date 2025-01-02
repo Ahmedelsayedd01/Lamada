@@ -31,7 +31,6 @@ const BusinessSettingsPage = () => {
   const CurrencyRef = useRef();
 
   const [maintenanceMode, setMaintenanceMode] = useState(0);
-
   const [companyName, setCompanyName] = useState("");
   const [companyPhone, setCompanyPhone] = useState("");
   const [companyEmail, setCompanyEmail] = useState("");
@@ -48,61 +47,56 @@ const BusinessSettingsPage = () => {
 
   const [countries, setCountries] = useState(
     [
-      { name: 'Afghanistan' }, { name: 'Albania' }, { name: 'Algeria' }, { name: 'Andorra' }, { name: 'Angola' },
-      { name: 'Antigua and Barbuda' }, { name: 'Argentina' }, { name: 'Armenia' }, { name: 'Australia' }, { name: 'Austria' },
-      { name: 'Azerbaijan' }, { name: 'Bahamas' }, { name: 'Bahrain' }, { name: 'Bangladesh' }, { name: 'Barbados' },
-      { name: 'Belarus' }, { name: 'Belgium' }, { name: 'Belize' }, { name: 'Benin' }, { name: 'Bhutan' },
-      { name: 'Bolivia' }, { name: 'Bosnia and Herzegovina' }, { name: 'Botswana' }, { name: 'Brazil' }, { name: 'Brunei' },
-      { name: 'Bulgaria' }, { name: 'Burkina Faso' }, { name: 'Burundi' }, { name: 'Cabo Verde' }, { name: 'Cambodia' },
-      { name: 'Cameroon' }, { name: 'Canada' }, { name: 'Central African Republic' }, { name: 'Chad' }, { name: 'Chile' },
-      { name: 'China' }, { name: 'Colombia' }, { name: 'Comoros' }, { name: 'Congo, Democratic Republic of the' }, { name: 'Congo, Republic of the' },
-      { name: 'Costa Rica' }, { name: 'Croatia' }, { name: 'Cuba' }, { name: 'Cyprus' }, { name: 'Czech Republic' },
-      { name: 'Denmark' }, { name: 'Djibouti' }, { name: 'Dominica' }, { name: 'Dominican Republic' }, { name: 'Ecuador' },
-      { name: 'Egypt' }, { name: 'El Salvador' }, { name: 'Equatorial Guinea' }, { name: 'Eritrea' }, { name: 'Estonia' },
-      { name: 'Eswatini' }, { name: 'Ethiopia' }, { name: 'Fiji' }, { name: 'Finland' }, { name: 'France' },
-      { name: 'Gabon' }, { name: 'Gambia' }, { name: 'Georgia' }, { name: 'Germany' }, { name: 'Ghana' },
-      { name: 'Greece' }, { name: 'Grenada' }, { name: 'Guatemala' }, { name: 'Guinea' }, { name: 'Guinea-Bissau' },
-      { name: 'Guyana' }, { name: 'Haiti' }, { name: 'Honduras' }, { name: 'Hungary' }, { name: 'Iceland' },
-      { name: 'India' }, { name: 'Indonesia' }, { name: 'Iran' }, { name: 'Iraq' }, { name: 'Ireland' },
-      { name: 'Israel' }, { name: 'Italy' }, { name: 'Jamaica' }, { name: 'Japan' }, { name: 'Jordan' },
-      { name: 'Kazakhstan' }, { name: 'Kenya' }, { name: 'Kiribati' }, { name: 'Korea, North' }, { name: 'Korea, South' },
-      { name: 'Kosovo' }, { name: 'Kuwait' }, { name: 'Kyrgyzstan' }, { name: 'Laos' }, { name: 'Latvia' },
-      { name: 'Lebanon' }, { name: 'Lesotho' }, { name: 'Liberia' }, { name: 'Libya' }, { name: 'Liechtenstein' },
-      { name: 'Lithuania' }, { name: 'Luxembourg' }, { name: 'Madagascar' }, { name: 'Malawi' }, { name: 'Malaysia' },
-      { name: 'Maldives' }, { name: 'Mali' }, { name: 'Malta' }, { name: 'Marshall Islands' }, { name: 'Mauritania' },
-      { name: 'Mauritius' }, { name: 'Mexico' }, { name: 'Micronesia' }, { name: 'Moldova' }, { name: 'Monaco' },
-      { name: 'Mongolia' }, { name: 'Montenegro' }, { name: 'Morocco' }, { name: 'Mozambique' }, { name: 'Myanmar' },
-      { name: 'Namibia' }, { name: 'Nauru' }, { name: 'Nepal' }, { name: 'Netherlands' }, { name: 'New Zealand' },
-      { name: 'Nicaragua' }, { name: 'Niger' }, { name: 'Nigeria' }, { name: 'North Macedonia' }, { name: 'Norway' },
-      { name: 'Oman' }, { name: 'Pakistan' }, { name: 'Palau' }, { name: 'Palestine' }, { name: 'Panama' },
-      { name: 'Papua New Guinea' }, { name: 'Paraguay' }, { name: 'Peru' }, { name: 'Philippines' }, { name: 'Poland' },
-      { name: 'Portugal' }, { name: 'Qatar' }, { name: 'Romania' }, { name: 'Russia' }, { name: 'Rwanda' },
-      { name: 'Saint Kitts and Nevis' }, { name: 'Saint Lucia' }, { name: 'Saint Vincent and the Grenadines' }, { name: 'Samoa' }, { name: 'San Marino' },
-      { name: 'Sao Tome and Principe' }, { name: 'Saudi Arabia' }, { name: 'Senegal' }, { name: 'Serbia' }, { name: 'Seychelles' },
-      { name: 'Sierra Leone' }, { name: 'Singapore' }, { name: 'Slovakia' }, { name: 'Slovenia' }, { name: 'Solomon Islands' },
-      { name: 'Somalia' }, { name: 'South Africa' }, { name: 'South Sudan' }, { name: 'Spain' }, { name: 'Sri Lanka' },
-      { name: 'Sudan' }, { name: 'Suriname' }, { name: 'Sweden' }, { name: 'Switzerland' }, { name: 'Syria' },
-      { name: 'Taiwan' }, { name: 'Tajikistan' }, { name: 'Tanzania' }, { name: 'Thailand' }, { name: 'Timor-Leste' },
-      { name: 'Togo' }, { name: 'Tonga' }, { name: 'Trinidad and Tobago' }, { name: 'Tunisia' }, { name: 'Turkey' },
-      { name: 'Turkmenistan' }, { name: 'Tuvalu' }, { name: 'Uganda' }, { name: 'Ukraine' }, { name: 'United Arab Emirates' },
-      { name: 'United Kingdom' }, { name: 'United States' }, { name: 'Uruguay' }, { name: 'Uzbekistan' }, { name: 'Vanuatu' },
-      { name: 'Vatican City' }, { name: 'Venezuela' }, { name: 'Vietnam' }, { name: 'Yemen' }, { name: 'Zambia' },
-      { name: 'Zimbabwe' }
+      'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola',
+      'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria',
+      'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados',
+      'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan',
+      'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei',
+      'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia',
+      'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile',
+      'China', 'Colombia', 'Comoros', 'Congo, Democratic Republic of the', 'Congo, Republic of the',
+      'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic',
+      'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador',
+      'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia',
+      'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France',
+      'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana',
+      'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau',
+      'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland',
+      'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland',
+      'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan',
+      'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South',
+      'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia',
+      'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein',
+      'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia',
+      'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania',
+      'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco',
+      'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar',
+      'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand',
+      'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway',
+      'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama',
+      'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland',
+      'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda',
+      'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino',
+      'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles',
+      'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands',
+      'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka',
+      'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria',
+      'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste',
+      'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey',
+      'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates',
+      'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu',
+      'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia',
+      'Zimbabwe'
     ]
   );
-
   const [isOpenCountries, setIsOpenCountries] = useState(false);
 
   const [stateTimeZone, setStateTimeZone] = useState("Select Time Zone");
   const [selectedTimeZone, setSelectedTimeZone] = useState("");
   const [timeZone, setTimeZone] = useState([]);
+
   const [isOpenTimeZone, setIsOpenTimeZone] = useState(false);
 
-  const [stateTimeFormat, setStateTimeFormat] = useState("Select Time Format");
-  const [timeFormat, setTimeFormat] = useState([
-    { name: "am/pm" },
-    { name: "24hours" },
-  ]);
   const [isOpenTimeFormat, setIsOpenTimeFormat] = useState(false);
 
   // const [stateCurrency, setStateCurrency] = useState('Select Currency');
@@ -113,7 +107,13 @@ const BusinessSettingsPage = () => {
   const [rightCurrency, setRightCurrency] = useState(0);
 
   const [companyCopyrightText, setCompanyCopyrightText] = useState("");
-  const [timeFormats, setTimeFormats] = useState([]);
+
+  const [stateTimeFormat, setStateTimeFormat] = useState("Select Time Format");
+  const [selectedTimeFormat, setSelectedTimeFormat] = useState("");
+  const [timeFormat, setTimeFormat] = useState([
+    { name: "am/pm" },
+    { name: "24hours" },
+  ]);
 
   const [allSystem, setAllSystem] = useState(0);
   const [branchPanel, setBranchPanel] = useState(0);
@@ -137,13 +137,13 @@ const BusinessSettingsPage = () => {
     url: "https://lamadabcknd.food2go.online/admin/settings/business_setup/company",
   });
 
-  const {
-    refetch: refetchMaintenance,
-    loading: loadingMaintenance,
-    data: dataMaintennance,
-  } = useGet({
-    url: "https://lamadabcknd.food2go.online/admin/settings/business_setup/maintenance",
-  });
+  // const {
+  //   refetch: refetchMaintenance,
+  //   loading: loadingMaintenance,
+  //   data: dataMaintennance,
+  // } = useGet({
+  //   url: "https://lamadabcknd.food2go.online/admin/settings/business_setup/maintenance",
+  // });
 
   const {
     refetch: refetchCity,
@@ -151,7 +151,7 @@ const BusinessSettingsPage = () => {
     data: dataCity,
   } = useGet({ url: "https://lamadabcknd.food2go.online/admin/settings/city" });
 
-  const [dataCompany2, setDataCompany] = useState(null);
+
 
 
   const [dataCompanyInfo, setDataCompanyInfo] = useState([]);
@@ -161,7 +161,8 @@ const BusinessSettingsPage = () => {
   const [currencyId, setCurrencyId] = useState("");
   const [isOpenCurrency, setIsOpenCurrency] = useState(false);
   const [dataMain, setDataMain] = useState([])
-  const [formDataMaintenance, setFormDataMaintenance] = useState({})
+  const [dataMaintennance, setDataMaintenance] = useState({})
+  const [formDataMaintenance, setFormDataMaintenance] = useState({});
 
   const { postData, loadingPost, response } = usePost({
     url: "https://lamadabcknd.food2go.online/admin/settings/business_setup/company/add",
@@ -169,48 +170,67 @@ const BusinessSettingsPage = () => {
 
 
   // const { postDataStatus, loadingPostStatus, responseStatus } = usePost({
-  //      url: "https://bcknd.food2go.online/admin/settings/business_setup/maintenance/status",
+  //      url: "https://lamadabcknd.food2go.online/admin/settings/business_setup/maintenance/status",
   //    });
 
   //  const { postDataMaintenance, loadingPostMaintenance, responseMaintenanace } = usePost({
-  //    url: "https://bcknd.food2go.online/admin/settings/business_setup/maintenance/add",
+  //    url: "https://lamadabcknd.food2go.online/admin/settings/business_setup/maintenance/add",
   //  });
 
   useEffect(() => {
     refetchCompany();
     refetchCity();
-    refetchMaintenance();
-  }, [refetchCompany, refetchCity, refetchMaintenance]);
+    // refetchMaintenance();
+  }, [refetchCompany, refetchCity]);
 
 
   useEffect(() => {
     if (dataCompany) {
-      setDataCompany(dataCompany);
+
       // setDataCurrency(dataCompany?.currency || []);
       // setDataCompanyInfo(dataCompany?.company_info || []);
-      setCompanyName(dataCompanyInfo?.name || '');
-      setCompanyPhone(dataCompanyInfo?.phone || '');
-      setCompanyEmail(dataCompanyInfo?.email || '');
-      setCompanyAddress(dataCompanyInfo?.address || '');
-      setIcon(dataCompanyInfo?.fav_icon_link || '');
-      setLogo(dataCompanyInfo?.logo_link || '');
-      setStateCountries(dataCompanyInfo?.country || stateCountries);
-      setSelectedCountry(dataCompanyInfo?.country || selectedCountry)
-      setSelectedTimeZone(dataCompanyInfo?.time_zone || selectedTimeZone);
-      setStateTimeFormat(dataCompanyInfo?.time_format || stateTimeFormat)
+      setCompanyName(dataCompany?.company_info?.name || '');
+      setCompanyPhone(dataCompany?.company_info?.phone || '');
+      setCompanyEmail(dataCompany?.company_info?.email || '');
+      setCompanyAddress(dataCompany?.company_info?.address || '');
+      setIcon(dataCompany?.company_info?.fav_icon_link || '');
+      setLogo(dataCompany?.company_info?.logo_link || '');
+      setStateCountries(dataCompany?.company_info?.country || stateCountries);
+      setSelectedCountry(dataCompany?.company_info?.country || selectedCountry)
 
-      if (dataCompanyInfo.currency_id) {
+      setStateTimeZone(dataCompany?.company_info?.time_zone || '');
+      setSelectedTimeZone(dataCompany?.company_info?.time_zone || '');
+
+      setSelectedTimeFormat(dataCompany?.company_info?.time_format || stateTimeFormat)
+      setStateTimeFormat(dataCompany?.company_info?.time_format || stateTimeFormat)
+
+      setDataMaintenance(dataCompany.maintenance)
+      setAllSystem(dataCompany.maintenance.all)
+      setBranchPanel(dataCompany.maintenance.branch)
+      setCustomerApp(dataCompany.maintenance.customer)
+      setWebApp(dataCompany.maintenance.web)
+      setDeliverymanApp(dataCompany.maintenance.delivery)
+      setForDay(dataCompany.maintenance.day)
+      setForWeek(dataCompany.maintenance.week)
+      setUntilChange(dataCompany.maintenance.until_change)
+      setCustomize(dataCompany.maintenance.customize)
+      setMaintenanceMode(dataCompany.maintenance.status)
+      setStartDate(dataCompany.maintenance.start_date)
+      setEndDate(dataCompany.maintenance.end_date)
+
+
+      if (dataCompany.company_info.currency_id) {
         const matchedCurrency = dataCompany.currency.find(
-          (curr) => curr.id === dataCompanyInfo.currency_id
+          (curr) => curr.id === dataCompany.company_info.currency_id
         );
 
         if (matchedCurrency) {
           setStateCurrency(matchedCurrency.name);
+          setCurrencyId(matchedCurrency.id);
         }
       }
-      setTimeFormats(dataCompanyInfo.time_format)
-      setCompanyCopyrightText(dataCompanyInfo.copy_right);
-      if (dataCompanyInfo.currency_position === "right") {
+      setCompanyCopyrightText(dataCompany.company_info.copy_right);
+      if (dataCompany.company_info.currency_position === "right") {
         setLeftCurrency(0);
         setRightCurrency(1);
       } else {
@@ -220,30 +240,30 @@ const BusinessSettingsPage = () => {
 
 
     }
-
+    // console.log("data fetch maintenance" ,dataCompany.maintenance)
     console.log("data fetch company :", dataCompany);
-  }, [dataCompany, dataCompanyInfo]);
+  }, [dataCompany]);
 
-  useEffect(() => {
-    if (dataMaintennance) {
+  // useEffect(() => {
+  //   if (dataMaintennance) {
 
-      setDataMain(dataMaintennance)
-      // data maintenance
-      setMaintenanceMode(dataMaintennance.maintenance.status)
-      setEndDate(dataMaintennance.maintenance.end_date)
-      setStartDate(dataMaintennance.maintenance.start_date)
-      setCustomize(dataMaintennance.maintenance.customize)
-      setUntilChange(dataMaintennance.maintenance.until_change)
-      setForWeek(dataMaintennance.maintenance.week)
-      setForDay(dataMaintennance.maintenance.day)
-      setDeliverymanApp(dataMaintennance.maintenance.delivery)
-      setBranchPanel(dataMaintennance.maintenance.branch)
-      setCustomerApp(dataMaintennance.maintenance.customer)
-      setAllSystem(dataMaintennance.maintenance.all)
-      setWebApp(dataMaintennance.maintenance.web)
-      console.log('data menteneance100', dataMaintennance)
-    }
-  }, [dataMaintennance])
+  //     setDataMain(dataMaintennance)
+  //     // data maintenance
+  //     setMaintenanceMode(dataMaintennance.maintenance.status)
+  //     setEndDate(dataMaintennance.maintenance.end_date)
+  //     setStartDate(dataMaintennance.maintenance.start_date)
+  //     setCustomize(dataMaintennance.maintenance.customize)
+  //     setUntilChange(dataMaintennance.maintenance.until_change)
+  //     setForWeek(dataMaintennance.maintenance.week)
+  //     setForDay(dataMaintennance.maintenance.day)
+  //     setDeliverymanApp(dataMaintennance.maintenance.delivery)
+  //     setBranchPanel(dataMaintennance.maintenance.branch)
+  //     setCustomerApp(dataMaintennance.maintenance.customer)
+  //     setAllSystem(dataMaintennance.maintenance.all)
+  //     setWebApp(dataMaintennance.maintenance.web)
+  //     console.log('data menteneance100', dataMaintennance)
+  //   }
+  // }, [dataMaintennance])
 
   // useEffect(() => {
   //   if (dataCity && dataCity.cities) {
@@ -345,19 +365,22 @@ const BusinessSettingsPage = () => {
       auth.toastError("Please select at least one system.");
     }
 
-    // const formDataMaintenance = new FormData();
-    // formDataMaintenance.append("status",maintenanceMode)
-    // formDataMaintenance.append("all",allSystem)
-    // formDataMaintenance.append("branch",branchPanel)
-    // formDataMaintenance.append("customer",customerApp)
-    // formDataMaintenance.append("web",webApp)
-    // formDataMaintenance.append("delivery",deliverymanApp)
-    // formDataMaintenance.append("day",forDay)
-    // formDataMaintenance.append("week",forWeek)
-    // formDataMaintenance.append("until_change",untilChange)
-    // formDataMaintenance.append("customize",Customize)
-    // formDataMaintenance.append("start_date",startDate)
-    // formDataMaintenance.append("end_date",endDate)
+
+    const updatedData = {
+      status: maintenanceMode,
+      all: allSystem,
+      branch: branchPanel,
+      customer: customerApp,
+      web: webApp,
+      delivery: deliverymanApp,
+      day: forDay,
+      week: forWeek,
+      until_change: untilChange,
+      customize: Customize,
+      start_date: startDate,
+      end_date: endDate
+    };
+
 
 
 
@@ -386,20 +409,6 @@ const BusinessSettingsPage = () => {
     //     postDataMain(formDataMaintenance, "Branch Added Success");
 
     //  ----------------------------------
-    const updatedData = {
-      status: maintenanceMode,
-      all: allSystem,
-      branch: branchPanel,
-      customer: customerApp,
-      web: webApp,
-      delivery: deliverymanApp,
-      day: forDay,
-      week: forWeek,
-      until_change: untilChange,
-      customize: Customize,
-      start_date: startDate,
-      end_date: endDate
-    };
 
     // Update the state with the new object
 
@@ -416,7 +425,7 @@ const BusinessSettingsPage = () => {
 
     formData.append("logo", logo);
     formData.append("fav_icon", icon);
-    formData.append("time_zone", selectedTimeZone);
+    formData.append("time_zone", JSON.stringify(selectedTimeZone));
 
     formData.append("time_format", stateTimeFormat);
     formData.append("currency_id", currencyId);
@@ -430,8 +439,8 @@ const BusinessSettingsPage = () => {
       formData.append("currency_position", "left");
     }
 
-
     formData.append("copy_right", companyCopyrightText);
+
     for (const [key, value] of Object.entries(updatedData)) {
       formData.append(`maintenance[${key}]`, value);
     }
@@ -480,13 +489,14 @@ const BusinessSettingsPage = () => {
   };
 
   const handleSelectCountry = (country) => {
+    setCountries(country.id)
     setStateCountries(country.name);
   };
   const handleSelectTimeZone = (timeZone) => {
     setStateTimeZone(timeZone.name);
   };
   const handleSelectTimeFormat = (timeFormat) => {
-    setTimeFormat(timeFormat.id);
+    setSelectedTimeFormat(timeFormat.name);
     setStateTimeFormat(timeFormat.name);
   };
   // const handleSelectCurrency = (currency) => {
@@ -633,24 +643,26 @@ const BusinessSettingsPage = () => {
   }, []);
 
   const handleReset = () => {
-    setMaintenanceMode(0);
     setCompanyName("");
     setCompanyPhone("");
     setCompanyEmail("");
     setCompanyAddress("");
+    setLogoFile("");
     setLogo("");
-    setIcon("");
-    setLogoFile(null);
-    setIconFile(null);
+    setIconFile("");
     setStateCountries("Select Country");
+    setSelectedCountry("");
     setStateTimeZone("Select Time Zone");
+    setSelectedTimeZone("");
     setStateTimeFormat("Select Time Format");
-    // setStateCurrency('Select Currency');
-    setStateCurrency("Select Currency");
-    setCurrencyId("");
+    setSelectedTimeFormat("");
+    setStateCurrency('Select Currency');
+    setCurrencyId('');
     setLeftCurrency(0);
     setRightCurrency(0);
     setCompanyCopyrightText("");
+
+    setMaintenanceMode(0);
     setAllSystem(0);
     setBranchPanel(0);
     setCustomerApp(0);
@@ -803,22 +815,12 @@ const BusinessSettingsPage = () => {
             <span className="text-xl font-TextFontRegular text-thirdColor">
               Time Zone:
             </span>
-            {/* <DropDown
-                                          ref={TimeZoneRef}
-                                          handleOpen={handleOpenTimeZone}
-                                          stateoption={stateTimeZone}
-                                          openMenu={isOpenTimeZone}
-                                          handleOpenOption={handleOpenTimeZone}
-                                          onSelectOption={handleSelectTimeZone}
-                                          options={timeZone}
-                                          border={false}
-                                   /> */}
             <Dropdown
               value={selectedTimeZone}
               onChange={(e) => setSelectedTimeZone(e.value)}
               options={timeZone}
               optionLabel="name"
-              placeholder="Select a Time Zone"
+              placeholder={stateTimeZone}
               filter
               className="w-full md:w-14rem"
             />
@@ -835,7 +837,7 @@ const BusinessSettingsPage = () => {
               openMenu={isOpenTimeFormat}
               handleOpenOption={handleOpenTimeFormat}
               onSelectOption={handleSelectTimeFormat}
-              options={timeFormats}
+              options={timeFormat}
               border={false}
             />
           </div>
