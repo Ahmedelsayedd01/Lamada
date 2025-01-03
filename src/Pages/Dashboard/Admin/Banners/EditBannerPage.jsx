@@ -64,10 +64,10 @@ const EditBannerPage = () => {
                      allData?.products &&
                      allData?.deals) {
                      setTaps(allData?.translations || []);
-                     setCategories([{ id: '', name: stateCategories }, ...dataCategory.parent_categories] || []);
-                     setProducts([{ id: '', name: stateProducts }, ...allData?.products] || []);
-                     setFilterProducts([{ id: '', name: stateProducts }, ...allData?.products] || []);
-                     setDeals([{ id: '', name: stateDeals }, ...allData?.deals] || []);
+                     setCategories([{ id: '', name: 'Select Category' }, ...dataCategory.parent_categories] || []);
+                     setProducts([{ id: '', name: 'Select Product' }, ...allData?.products] || []);
+                     // setFilterProducts([{ id: '', name:'Select Product' }, ...allData?.products] || []);
+                     setDeals([{ id: '', name: 'Select Deal' }, ...allData?.deals] || []);
               }
        }, [allData, dataCategory]);
 
@@ -75,11 +75,17 @@ const EditBannerPage = () => {
               if (dataBanner && dataBanner.banner) {
                      const data = dataBanner.banner;
 
-                     setStateCategories(data?.category_banner?.name || stateCategories)
+                     setStateCategories(data?.category_banner?.name || 'Select Category')
                      setCategoryId(data?.category_banner?.id || '')
-                     setStateProducts(data?.product?.name || stateProducts)
+                     setStateProducts(data?.product?.name || 'Select Product')
+
+                     const filterP = products.filter((product) => {
+                            return product.category_id === data?.category_banner?.id
+                     });
+
+                     setFilterProducts([{ id: '', name: 'Select Product' }, ...filterP] || []);
                      setProductId(data?.product?.id || '')
-                     setStateDeals(data?.deal?.title || stateDeals)
+                     setStateDeals(data?.deal?.title || 'Select Deal')
                      setDealId(data?.deal?.id || '')
 
                      setImage(data?.images || [])
@@ -89,7 +95,6 @@ const EditBannerPage = () => {
 
               }
        }, [dataBanner]);
-
 
 
 
@@ -201,23 +206,33 @@ const EditBannerPage = () => {
               // }
 
 
-              // if (!categoryId) {
-              //        auth.toastError('please Select Category')
-              //        return;
-              // }
-              // if (!productId) {
-              //        auth.toastError('please Select Product')
-              //        return;
-              // }
-              // if (!dealId) {
-              //        auth.toastError('please Select Deal')
-              //        return;
-              // }
+              if (!categoryId && !dealId) {
+                     if (!categoryId) {
+                            auth.toastError('please Select Category')
+                            return;
+                     }
+                     if (!productId) {
+                            auth.toastError('please Select Product')
+                            return;
+                     }
+                     if (!dealId) {
+                            auth.toastError('please Select Deal')
+                            return;
+                     }
+              }
 
-              // if (!bannerOrder) {
-              //        auth.toastError('please Enter the Order')
-              //        return;
-              // }
+              if (categoryId && !productId) {
+                     if (!productId) {
+                            auth.toastError('please Select Product')
+                            return;
+                     }
+
+              }
+
+              if (!bannerOrder) {
+                     auth.toastError('please Enter the Order')
+                     return;
+              }
 
               const formData = new FormData();
 
