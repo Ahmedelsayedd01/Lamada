@@ -4,6 +4,7 @@ import { LoaderLogin } from "../../../../Components/Components";
 import { OrdersComponent } from "../../../../Store/CreateSlices";
 import { useGet } from "../../../../Hooks/useGet";
 import Chart from "./Charts/Chart";
+import FooterCard from "./FooterHome/FooterCard";
 
 const HomePage = () => {
 
@@ -28,7 +29,9 @@ const HomePage = () => {
   const [earning_statistics, setEarning_statistics] = useState({})
   const [orders, setOrders] = useState({})
   const [recent_orders, setRecent_orders] = useState([])
-
+  const [offers, setOffers] = useState([])
+  const [topSelling, SetTopSelling] = useState([])
+  const [topCustomers, setTopCustomers] = useState({})
 
   useEffect(() => {
     console.log("Fetching Count Orders...");
@@ -43,6 +46,10 @@ const HomePage = () => {
       setEarning_statistics(dataCharts.earning_statistics)
       setRecent_orders(dataCharts.recent_orders)
       setOrders(dataCharts.orders)
+      setOffers(dataCharts.offers)
+      SetTopSelling(dataCharts.top_selling)
+      setTopCustomers(dataCharts.top_customers)
+
 
     }
     console.log("fetch data Home", dataHome);
@@ -51,6 +58,9 @@ const HomePage = () => {
     console.log("fetch data Home stat earn", dataHome.earning_statistics);
     console.log("fetch data Home stat recent", dataHome.recent_orders);
     console.log("fetch data Home stat order", order_statistics);
+    console.log("fetch data Home stat offers", dataHome.offers);
+    console.log("fetch data Home stat top_customers", dataHome.top_customers);
+    console.log("fetch data Home stat top_selling", dataHome.top_selling);
     // console.log("fetch data Home stat order", dataCharts.orders);
 
   }, [dataCharts, dataHome, order_statistics]);
@@ -80,14 +90,22 @@ const HomePage = () => {
           </>
         ) : (
           <>
-            <div className="flex flex-col gap-7 items-start justify-center pb-16">
+            <div className="w-full flex flex-col gap-7 items-start justify-center pb-28">
               <CartsOrderSection ordersNum={counters} />
-              <Chart
-                order_statistics={order_statistics}
-                earning_statistics={earning_statistics}
-                recent_orders={recent_orders}
-                orders={orders}
-              />
+              <div className="w-full flex flex-col gap-7 items-start justify-center px-4">
+                <Chart
+                  order_statistics={order_statistics}
+                  earning_statistics={earning_statistics}
+                  recent_orders={recent_orders}
+                  orders={orders}
+                />
+                <div className="w-full flex items-center justify-between flex-wrap gap-5">
+                  <FooterCard title={"Top Selling Products"} link="/dashboard/setup_product/product" layout={"TopSelling"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
+                  {/* <FooterCard title={"Most Rated Products"} link="/dashboard/setup_product/product" /> */}
+                  <FooterCard title={"Deals"} link="/dashboard/deals" layout={"Deals"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
+                  <FooterCard title={"Top Customer"} link="/dashboard/customers/customers_list" layout={"default"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
+                </div>
+              </div>
             </div>
           </>
         )}
