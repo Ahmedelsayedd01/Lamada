@@ -28,7 +28,7 @@ const FooterCard = ({
                     src={order.image_link}
                     loading="lazy"
                     alt="Product"
-                    className="w-20 h-20 rounded-full object-cover object-center"
+                    className="w-20 h-25 rounded-xl object-cover object-center"
                   />
                   <div className="flex flex-col items-start w-full">
                     <p className="font-TextFontMedium text-sm">{order.name}</p>
