@@ -29,11 +29,15 @@ export const usePost = ({ url, login = false, type = false }) => {
 
                      if (response.status === 200) {
                             setResponse(response);
-                            { name ? auth.toastSuccess(name) : '' }   
+                            { name ? auth.toastSuccess(name) : '' }
                             // auth.toastSuccess(name)
                      }
               } catch (error) {
-                     auth.toastError(error.message)
+                     if (error.response.data.faild) {
+                            auth.toastError(error.response.data.faild)
+                     } else {
+                            auth.toastError(error.message)
+                     }
                      console.error('error post Json', error);
               } finally {
                      setLoadingPost(false);
