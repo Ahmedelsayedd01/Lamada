@@ -167,7 +167,7 @@ const ZonePage = ({ refetch }) => {
                                                                                                                                      <div className="mt-2 text-center">
                                                                                                                                             {/* <DialogTitle
                                                                                                                                             as="h3"
-                                                                                                                                            className="text-xl font-semibold leading-10 text-gray-900"
+                                                                                                                                            className="text-xl font-TextFontSemiBold leading-10 text-gray-900"
                                                                                                                                      > */}
                                                                                                                                             You will delete zone {zone?.branch?.name || "-"}
                                                                                                                                             {/* </DialogTitle> */}
@@ -175,7 +175,7 @@ const ZonePage = ({ refetch }) => {
                                                                                                                               </div>
                                                                                                                        </div>
                                                                                                                        <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                                                                                              <button className="inline-flex w-full justify-center rounded-md bg-mainColor px-6 py-3 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto" onClick={() => handleDelete(zone.id, zone.branch.name)}>
+                                                                                                                              <button className="inline-flex w-full justify-center rounded-md bg-mainColor px-6 py-3 text-sm font-TextFontSemiBold text-white shadow-sm sm:ml-3 sm:w-auto" onClick={() => handleDelete(zone.id, zone.branch.name)}>
                                                                                                                                      Delete
                                                                                                                               </button>
 
@@ -183,7 +183,7 @@ const ZonePage = ({ refetch }) => {
                                                                                                                                      type="button"
                                                                                                                                      data-autofocus
                                                                                                                                      onClick={handleCloseDelete}
-                                                                                                                                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-6 py-3 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
+                                                                                                                                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-6 py-3 text-sm font-TextFontMedium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
                                                                                                                               >
                                                                                                                                      Cancel
                                                                                                                               </button>
@@ -205,19 +205,19 @@ const ZonePage = ({ refetch }) => {
                                    {zones.length > 0 && (
                                           <div className="my-6 flex items-center justify-center gap-x-4">
                                                  {currentPage !== 1 && (
-                                                        <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-medium' onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
+                                                        <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-TextFontMedium' onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
                                                  )}
                                                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                                                         <button
                                                                key={page}
                                                                onClick={() => handlePageChange(page)}
-                                                               className={`px-4 py-2 mx-1 text-lg font-semibold rounded-full duration-300 ${currentPage === page ? 'bg-mainColor text-white' : ' text-mainColor'}`}
+                                                               className={`px-4 py-2 mx-1 text-lg font-TextFontSemiBold rounded-full duration-300 ${currentPage === page ? 'bg-mainColor text-white' : ' text-mainColor'}`}
                                                         >
                                                                {page}
                                                         </button>
                                                  ))}
                                                  {totalPages !== currentPage && (
-                                                        <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-medium' onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+                                                        <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-TextFontMedium' onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
                                                  )}
                                           </div>
                                    )}

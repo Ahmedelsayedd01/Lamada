@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { TitlePage, TitleSection } from '../../../Components/Components'
-import { AddCustomersSection, CustomersPage } from '../../../Pages/Pages'
+import { TitlePage, TitleSection } from '../../../../Components/Components'
+import { AddCustomersSection, CustomersPage } from '../../../../Pages/Pages'
 
 const CustomersLayout = () => {
     const [update, setUpdate] = useState(false)

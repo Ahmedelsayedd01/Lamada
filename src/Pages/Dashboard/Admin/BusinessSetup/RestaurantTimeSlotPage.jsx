@@ -4,7 +4,7 @@ import { useGet } from '../../../../Hooks/useGet';
 import { usePost } from '../../../../Hooks/usePostJson';
 import { Dropdown } from 'primereact/dropdown';
 
-const RestaurantTimeSlotPage = () => {
+const RestaurantTimeSlotPage = ({ refetch }) => {
     const [allClosestTime, setAllClosestTime] = useState([{ closingTimeAm: '', closingTimePm: '' }]);
     const { refetch: refetchTimeSlot, loading: loadingTime, data: dataSlot } = useGet({ url: 'https://lamadabcknd.food2go.online/admin/settings/business_setup/time_slot' });
     const { postData, loadingPost, response } = usePost({ url: 'https://lamadabcknd.food2go.online/admin/settings/business_setup/time_slot/add' });
@@ -30,7 +30,7 @@ const RestaurantTimeSlotPage = () => {
                 custom: setting.custom || [],
             });
             setDay(setting.custom || '');
-            // setStateDay(setting.custom[0])
+            setStateDay(setting.custom[0])
             setAllClosestTime(
                 (setting.daily || []).map(item => ({
                     closingTimeAm: item.from || '',
@@ -173,20 +173,16 @@ const RestaurantTimeSlotPage = () => {
                     )}
 
                     <div className="w-full flex items-center justify-end gap-x-4 mt-6">
-                        <div>
-                            <StaticButton
-                                text={'Reset'}
-                                handleClick={handleReset}
-                                bgColor="bg-transparent"
-                                Color="text-mainColor"
-                                border="border-2"
-                                borderColor="border-mainColor"
-                                rounded="rounded-full"
-                            />
-                        </div>
-                        <div>
-                            <SubmitButton text={'Submit'} rounded="rounded-full" handleClick={handleSubmit} />
-                        </div>
+                        <StaticButton
+                            text={'Reset'}
+                            handleClick={handleReset}
+                            bgColor="bg-transparent"
+                            Color="text-mainColor"
+                            border="border-2"
+                            borderColor="border-mainColor"
+                            rounded="rounded-full"
+                        />
+                        <SubmitButton text={'Submit'} rounded="rounded-full" handleClick={handleSubmit} />
                     </div>
                 </form>
             )}

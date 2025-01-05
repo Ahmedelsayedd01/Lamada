@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useChangeState } from '../../../../Hooks/useChangeState';
-import { useDelete } from '../../../../Hooks/useDelete';
-import { LoaderLogin, StaticLoader, Switch } from '../../../../Components/Components';
+import { useChangeState } from '../../../../../Hooks/useChangeState';
+import { useDelete } from '../../../../../Hooks/useDelete';
+import { StaticLoader, Switch } from '../../../../../Components/Components';
 import { Link } from 'react-router-dom';
-import { DeleteIcon, EditIcon } from '../../../../Assets/Icons/AllIcons';
+import { DeleteIcon, EditIcon } from '../../../../../Assets/Icons/AllIcons';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
-import Warning from '../../../../Assets/Icons/AnotherIcons/WarningIcon';
-import { useGet } from '../../../../Hooks/useGet';
+import Warning from '../../../../../Assets/Icons/AnotherIcons/WarningIcon';
+import { useGet } from '../../../../../Hooks/useGet';
 
 const CustomersPage = ({ refetch, setUpdate }) => {
   const { refetch: refetchCustomer, loading: loadingCustomer, data: dataCustomer } = useGet({ url: 'https://lamadabcknd.food2go.online/admin/customer' });
@@ -97,7 +97,7 @@ const CustomersPage = ({ refetch, setUpdate }) => {
             <thead className="w-full">
               <tr className="w-full border-b-2">
                 {headers.map((name, index) => (
-                  <th className="min-w-[90px] sm:w-[8%] lg:w-[5%] text-mainColor text-center font-TextFontLight sm:text-sm lg:text-base xl:text-lg pb-3" key={index}>
+                  <th className="min-w-[100px] sm:w-[8%] lg:w-[5%] text-mainColor text-center font-TextFontLight sm:text-sm lg:text-base xl:text-lg pb-3" key={index}>
                     {name}
                   </th>
                 ))}
@@ -184,7 +184,7 @@ const CustomersPage = ({ refetch, setUpdate }) => {
                                     </div>
                                   </div>
                                   <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                    <button className="inline-flex w-full justify-center rounded-md bg-mainColor px-6 py-3 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto" onClick={() => handleDelete(customer.id, customer?.f_name + ' ' + customer?.l_name)}>
+                                    <button className="inline-flex w-full justify-center rounded-md bg-mainColor px-6 py-3 text-sm font-TextFontSemiBold text-white shadow-sm sm:ml-3 sm:w-auto" onClick={() => handleDelete(customer.id, customer?.f_name + ' ' + customer?.l_name)}>
                                       Delete
                                     </button>
 
@@ -192,7 +192,7 @@ const CustomersPage = ({ refetch, setUpdate }) => {
                                       type="button"
                                       data-autofocus
                                       onClick={handleCloseDelete}
-                                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-6 py-3 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
+                                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-6 py-3 text-sm font-TextFontMedium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
                                     >
                                       Cancel
                                     </button>
@@ -214,19 +214,19 @@ const CustomersPage = ({ refetch, setUpdate }) => {
           {customers.length > 0 && (
             <div className="my-6 flex items-center justify-center gap-x-4">
               {currentPage !== 1 && (
-                <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-medium' onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
+                <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-TextFontMedium' onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
               )}
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}
                   onClick={() => handlePageChange(page)}
-                  className={`px-4 py-2 mx-1 text-lg font-semibold rounded-full duration-300 ${currentPage === page ? 'bg-mainColor text-white' : ' text-mainColor'}`}
+                  className={`px-4 py-2 mx-1 text-lg font-TextFontSemiBold rounded-full duration-300 ${currentPage === page ? 'bg-mainColor text-white' : ' text-mainColor'}`}
                 >
                   {page}
                 </button>
               ))}
               {totalPages !== currentPage && (
-                <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-medium' onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+                <button type='button' className='text-lg px-4 py-2 rounded-xl bg-mainColor text-white font-TextFontMedium' onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
               )}
             </div>
           )}
