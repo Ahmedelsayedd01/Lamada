@@ -175,7 +175,7 @@ const ZonePage = ({ refetch }) => {
                                                                                                                               </div>
                                                                                                                        </div>
                                                                                                                        <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                                                                                              <button className="inline-flex w-full justify-center rounded-md bg-mainColor px-6 py-3 text-sm font-TextFontSemiBold text-white shadow-sm sm:ml-3 sm:w-auto" onClick={() => handleDelete(zone.id, zone.branch.name)}>
+                                                                                                                              <button className="inline-flex w-full justify-center rounded-md bg-mainColor px-6 py-3 text-sm font-TextFontSemiBold text-white shadow-sm sm:ml-3 sm:w-auto" onClick={() => handleDelete(zone.id, zone?.branch?.name || '')}>
                                                                                                                                      Delete
                                                                                                                               </button>
 

@@ -22,6 +22,7 @@ const EditZonePage = () => {
 
        const [cities, setCities] = useState([])
        const [branches, setBranches] = useState([])
+       const [filterBranches, setFilterBranches] = useState([])
        const [zone, setZone] = useState([])
 
        const [zoneName, setZoneName] = useState('');
@@ -65,6 +66,9 @@ const EditZonePage = () => {
                      setStateBranch(dataZone.zones?.branch?.name || 'Select Branch');
                      setBranchId(dataZone.zones?.branch?.id || '');
 
+                     const filterBranchs = branches.filter((branch, index) => branch.city_id == dataZone.city_id);
+                     setFilterBranches(filterBranchs)
+
                      setActiveZone(dataZone.zones?.status || 0);
               }
               console.log('cities', cities)
@@ -84,6 +88,11 @@ const EditZonePage = () => {
        const handleSelectCity = (option) => {
               setCityId(option.id);
               setStateCity(option.name);
+
+              setStateBranch('Select Branch');
+
+              const filterBranchs = branches.filter((branch, index) => branch.city_id == option.id);
+              setFilterBranches(filterBranchs)
        };
 
        const handleOpenBranches = () => {
@@ -228,7 +237,7 @@ const EditZonePage = () => {
                                                                       openMenu={isOpenBranch}
                                                                       handleOpenOption={handleOpenOptionBranches}
                                                                       onSelectOption={handleSelectBranch}
-                                                                      options={branches}
+                                                                      options={filterBranches}
                                                                       border={false}
                                                                />
                                                         </div>

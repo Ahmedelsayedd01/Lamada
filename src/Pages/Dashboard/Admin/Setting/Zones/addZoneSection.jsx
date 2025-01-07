@@ -64,6 +64,8 @@ const AddZoneSection = ({ update, setUpdate }) => {
     setCityId(option.id);
     setStateCity(option.name);
 
+    setStateBranch('Select Branch')
+
     const filterBranchs = branches.filter((branch, index) => branch.city_id == option.id);
     setFilterBranches(filterBranchs)
   };
