@@ -89,7 +89,8 @@ const EditZonePage = () => {
               setCityId(option.id);
               setStateCity(option.name);
 
-              setStateBranch('Select Branch');
+              setStateBranch('Select Branch')
+              setBranchId('');
 
               const filterBranchs = branches.filter((branch, index) => branch.city_id == option.id);
               setFilterBranches(filterBranchs)
@@ -160,10 +161,10 @@ const EditZonePage = () => {
                      auth.toastError('Please Select City')
                      return;
               }
-              if (!branchId) {
-                     auth.toastError('Please Select Branch')
-                     return;
-              }
+              // if (!branchId) {
+              //        auth.toastError('Please Select Branch')
+              //        return;
+              // }
 
 
               const formData = new FormData();
