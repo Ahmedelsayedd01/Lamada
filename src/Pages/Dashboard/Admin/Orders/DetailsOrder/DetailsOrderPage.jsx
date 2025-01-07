@@ -768,8 +768,9 @@ const DetailsOrderPage = () => {
                                                                              <div className="flex items-center gap-x-2 text-lg font-TextFontSemiBold"><span><FaUser className='text-mainColor' /></span>Delivery Information</div>
                                                                              <p className="text-sm">Name: {detailsData?.user?.f_name || '-'} {detailsData?.user?.l_name || '-'}</p>
                                                                              <p className="text-sm">Contact: {detailsData?.user?.phone || '-'}</p>
+                                                                             <p className="text-sm">Build Num: {detailsData?.address?.building_num || '-'}</p>
                                                                              <p className="text-sm">Floor: {detailsData?.address?.floor_num || '-'}</p>
-                                                                             <p className="text-sm">House: {detailsData?.address?.building_num || '-'}</p>
+                                                                             <p className="text-sm">House: {detailsData?.address?.apartment || '-'}</p>
                                                                              <p className="text-sm">Road: {detailsData?.address?.street || '-'}</p>
                                                                              <p className="text-sm pb-2 text-center">
                                                                                     {detailsData?.address?.address || '-'}
