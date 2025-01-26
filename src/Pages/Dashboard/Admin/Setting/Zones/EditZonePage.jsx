@@ -11,10 +11,13 @@ const EditZonePage = () => {
        const { zoneId } = useParams();
        const navigate = useNavigate();
 
-       const { refetch: refetchCities, loading: loadingCities, data: dataCities } = useGet({ url: 'https://lamadabcknd.food2go.online/admin/settings/city' });
-       const { refetch: refetchBranches, loading: loadingBranches, data: dataBranches } = useGet({ url: 'https://lamadabcknd.food2go.online/admin/branch' });
-       const { refetch: refetchZone, loading: loadingZone, data: dataZone } = useGet({ url: `https://lamadabcknd.food2go.online/admin/settings/zone/item/${zoneId}` });
-       const { postData, loadingPost, response } = usePost({ url: `https://lamadabcknd.food2go.online/admin/settings/zone/update/${zoneId}` });
+       const apiUrl = import.meta.env.VITE_API_BASE_URL;
+       const { refetch: refetchCities, loading: loadingCities, data: dataCities } = useGet({
+              url: `${apiUrl}/admin/settings/city`
+       });
+       const { refetch: refetchBranches, loading: loadingBranches, data: dataBranches } = useGet({ url: `${apiUrl}/admin/branch` });
+       const { refetch: refetchZone, loading: loadingZone, data: dataZone } = useGet({ url: `${apiUrl}/admin/settings/zone/item/${zoneId}` });
+       const { postData, loadingPost, response } = usePost({ url: `${apiUrl}/admin/settings/zone/update/${zoneId}` });
 
        const dropDownCities = useRef();
        const dropDownBranches = useRef();

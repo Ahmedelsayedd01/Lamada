@@ -8,13 +8,13 @@ import FooterCard from "./FooterHome/FooterCard";
 
 const HomePage = () => {
 
-
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const {
     refetch: refetchCountOrders,
     loading,
     data: dataCountOrders,
   } = useGet({
-    url: "https://lamadabcknd.food2go.online/admin/order/count",
+    url: `${apiUrl}/admin/order/count`,
   });
 
   const {
@@ -22,7 +22,7 @@ const HomePage = () => {
     loading: loadingChart,
     data: dataCharts,
   } = useGet({
-    url: "https://lamadabcknd.food2go.online/admin/home",
+    url: `${apiUrl}/admin/home`,
   });
   const [dataHome, setDataHome] = useState([]);
   const [order_statistics, setOrder_statistics] = useState({})
@@ -103,7 +103,7 @@ const HomePage = () => {
                   <FooterCard title={"Top Selling Products"} link="/dashboard/setup_product/product" layout={"TopSelling"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
                   {/* <FooterCard title={"Most Rated Products"} link="/dashboard/setup_product/product" /> */}
                   <FooterCard title={"Deals"} link="/dashboard/deals" layout={"Deals"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
-                  <FooterCard title={"Top Customer"} link="/dashboard/customers/customers_list" layout={"default"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
+                  <FooterCard title={"Top Customer"} link="/dashboard/users/customers" layout={"default"} topCustomers={topCustomers} topSelling={topSelling} offers={offers} />
                 </div>
               </div>
             </div>
