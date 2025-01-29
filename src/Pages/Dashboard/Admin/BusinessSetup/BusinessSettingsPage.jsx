@@ -359,13 +359,23 @@ const BusinessSettingsPage = () => {
       auth.toastError("Please enter either leftCurrency or rightCurrency");
     }
     // -----------------------------------
-    if (maintenanceMode === 0) {
-      auth.toastError("Please enter maintenanceMode ");
-      return;
-    }
+    // if (maintenanceMode === 0) {
+    //   auth.toastError("Please enter maintenanceMode ");
+    //   return;
+    // }
 
-    if (allSystem === 0 && branchPanel === 0 && customerApp === 0 && webApp === 0 && deliverymanApp === 0) {
-      auth.toastError("Please select at least one system.");
+    // if (allSystem === 0 && branchPanel === 0 && customerApp === 0 && webApp === 0 && deliverymanApp === 0) {
+    //   auth.toastError("Please select at least one system.");
+    // }
+    // if (maintenanceMode === 0) {
+    //   auth.toastError("Please enter maintenanceMode ");
+    //   return;
+    // }
+    if (maintenanceMode !== 0) {
+      if (allSystem === 0 && branchPanel === 0 && customerApp === 0 && webApp === 0 && deliverymanApp === 0) {
+        auth.toastError("Please select at least one system.");
+        return;
+      }
     }
 
 
@@ -432,7 +442,7 @@ const BusinessSettingsPage = () => {
 
     formData.append("logo", logo);
     formData.append("fav_icon", icon);
-    formData.append("time_zone", JSON.stringify(selectedTimeZone));
+    formData.append("time_zone", JSON.stringify(selectedTimeZone.name));
 
     formData.append("time_format", stateTimeFormat);
     formData.append("currency_id", currencyId);

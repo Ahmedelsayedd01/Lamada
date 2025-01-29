@@ -126,7 +126,12 @@ const OutForDeliveryOrdersPage = () => {
 
                         {/* Order ID */}
                         <td className="px-4 py-2 text-center text-thirdColor text-sm lg:text-base">
-                          {order?.id || '-'}
+                          <Link
+                            to={`/dashboard/orders/details/${order.id}`}
+                            className="text-secoundColor underline hover:text-mainColor text-xl font-TextFontMedium transition ease-in-out duration-200"
+                          >
+                            {order.id}
+                          </Link>
                         </td>
 
                         {/* Order Date */}
