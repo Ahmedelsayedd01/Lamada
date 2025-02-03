@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useGet } from '../../../../../Hooks/useGet';
 import { DropDown, LoaderLogin, SearchBar, TextInput } from '../../../../../Components/Components';
 import { FaClock, FaUser } from 'react-icons/fa';
@@ -10,8 +10,11 @@ import { useChangeState } from '../../../../../Hooks/useChangeState';
 const DetailsOrderPage = () => {
        const StatusRef = useRef(null)
        const { orderId } = useParams();
+       const location = useLocation();
+       const pathOrder = location.pathname;
+       const orderNumPath = pathOrder.split('/').pop();
        const apiUrl = import.meta.env.VITE_API_BASE_URL;
-       const { refetch: refetchDetailsOrder, loading: loadingDetailsOrder, data: dataDetailsOrder } = useGet({ url: `${apiUrl}/admin/order/order/${orderId}` });
+       const { refetch: refetchDetailsOrder, loading: loadingDetailsOrder, data: dataDetailsOrder } = useGet({ url: `${apiUrl}/admin/order/order/${orderNumPath}` });
        const { postData, loadingPost, response } = usePost({
               url: `${apiUrl}/admin/order/delivery`
        });
@@ -35,6 +38,35 @@ const DetailsOrderPage = () => {
        const [openReceipt, setOpenReceipt] = useState(null);
        const [openOrderNumber, setOpenOrderNumber] = useState(null);
        const [openDeliveries, setOpenDeliveries] = useState(null);
+
+       useEffect(() => {
+              refetchDetailsOrder();
+       }, [orderNumPath]);
+
+       useEffect(() => {
+              refetchDetailsOrder(); // Refetch data when the component mounts or orderId or path changes
+       }, [refetchDetailsOrder, orderId, location.pathname]);
+
+       useEffect(() => {
+              if (dataDetailsOrder && dataDetailsOrder?.order) {
+                     setDetailsData(dataDetailsOrder?.order)
+                     setOrderStatusName(dataDetailsOrder?.order?.order_status)
+                     const formattedOrderStatus = dataDetailsOrder?.order_status.map(status => ({ name: status }));
+
+                     setOrderStatus(formattedOrderStatus); // Update state with the transformed data
+                     setDeliveries(dataDetailsOrder?.deliveries)
+                     setDeliveriesFilter(dataDetailsOrder?.deliveries)
+                     setPreparationTime(dataDetailsOrder?.preparing_time)
+              }
+
+              console.log('dataDetailsOrder', dataDetailsOrder); // Refetch data when the component mounts
+              console.log('detailsData', detailsData); // Refetch data when the component mounts
+              console.log('OrderStatus', orderStatus); // Refetch data when the component mounts
+       }, [dataDetailsOrder]);
+       useEffect(() => {
+              console.log('orderId', orderId); // Refetch data when the component mounts
+       }, [orderId]);
+
 
        const timeString = dataDetailsOrder?.order?.date || '';
        const [olderHours, olderMinutes] = timeString.split(':').map(Number); // Extract hours and minutes as numbers
@@ -73,15 +105,6 @@ const DetailsOrderPage = () => {
        };
 
 
-
-
-       // console.log('dayString', dayString);
-       // console.log('initialTime', initialTime)
-       // console.log('day', day);
-       // console.log('hour', hour);
-       // console.log('minute', minute);
-       // console.log('second', second);
-       // console.log('Updated time', time);
 
        const handleChangeDeliveries = (e) => {
               const value = e.target.value.toLowerCase(); // Normalize input value
@@ -190,30 +213,6 @@ const DetailsOrderPage = () => {
 
 
        useEffect(() => {
-              refetchDetailsOrder(); // Refetch data when the component mounts
-       }, [refetchDetailsOrder]);
-
-       useEffect(() => {
-              if (dataDetailsOrder && dataDetailsOrder?.order) {
-                     setDetailsData(dataDetailsOrder?.order)
-                     setOrderStatusName(dataDetailsOrder?.order?.order_status)
-                     const formattedOrderStatus = dataDetailsOrder?.order_status.map(status => ({ name: status }));
-
-                     setOrderStatus(formattedOrderStatus); // Update state with the transformed data
-                     setDeliveries(dataDetailsOrder?.deliveries)
-                     setDeliveriesFilter(dataDetailsOrder?.deliveries)
-                     setPreparationTime(dataDetailsOrder?.preparing_time)
-              }
-
-              console.log('dataDetailsOrder', dataDetailsOrder); // Refetch data when the component mounts
-              console.log('detailsData', detailsData); // Refetch data when the component mounts
-              console.log('OrderStatus', orderStatus); // Refetch data when the component mounts
-       }, [dataDetailsOrder]);
-       useEffect(() => {
-              console.log('orderId', orderId); // Refetch data when the component mounts
-       }, [orderId]);
-
-       useEffect(() => {
               const countdown = setInterval(() => {
                      setPreparationTime((prevTime) => {
                             if (!prevTime) return prevTime;
@@ -275,7 +274,7 @@ const DetailsOrderPage = () => {
 
        return (
               <>
-                     {loadingPost || loadingChange ? (
+                     {loadingDetailsOrder || loadingPost || loadingChange ? (
                             <div className="mx-auto">
                                    <LoaderLogin />
                             </div>
@@ -301,11 +300,28 @@ const DetailsOrderPage = () => {
                                                                       ) : (
                                                                              <div className="w-full">
                                                                                     {/* Header */}
-                                                                                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 shadow rounded-lg">
+                                                                                    <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 shadow rounded-lg">
                                                                                            {/* Header */}
-                                                                                           <div className="flex flex-wrap justify-between items-start border-b border-gray-300 pb-4 mb-4">
-                                                                                                  <div className="w-full md:w-auto">
-                                                                                                         <h1 className="text-2xl font-TextFontMedium text-gray-800">Order <span className='text-mainColor'>#{detailsData?.order_number || ''}</span></h1>
+                                                                                           <div className="flex flex-col justify-between items-start border-b border-gray-300 pb-4 mb-4">
+                                                                                                  <div className="w-full">
+                                                                                                         <div className="w-full flex flex-wrap items-center justify-between">
+                                                                                                                <h1 className="text-2xl font-TextFontMedium text-gray-800">Order <span className='text-mainColor'>#{detailsData?.order_number || ''}</span></h1>
+                                                                                                                <div className="sm:w-full lg:w-6/12 flex items-center justify-center gap-2">
+                                                                                                                       <Link
+                                                                                                                              to={`/dashboard/orders/details/${Number(orderNumPath) - 1}`}
+                                                                                                                              className='w-6/12 text-center text-xl text-white bg-mainColor border-2 border-mainColor px-4 py-1 rounded-lg transition-all ease-in-out duration-300  hover:bg-white hover:text-mainColor'
+                                                                                                                       >
+                                                                                                                              {'<<'} Prev Order
+                                                                                                                       </Link>
+                                                                                                                       <Link
+                                                                                                                              to={`/dashboard/orders/details/${Number(orderNumPath) + 1}`}
+                                                                                                                              className='w-6/12 text-center text-xl text-white bg-mainColor border-2 border-mainColor px-4 py-1 rounded-lg transition-all ease-in-out duration-300  hover:bg-white hover:text-mainColor'
+                                                                                                                       >
+                                                                                                                              Next Order {'>>'}
+                                                                                                                       </Link>
+                                                                                                                </div>
+
+                                                                                                         </div>
                                                                                                          <p className="text-sm text-gray-700 mt-1">
                                                                                                                 <span className="font-TextFontSemiBold">Branch:</span> {detailsData?.branch?.address || ''}
                                                                                                          </p>
@@ -398,7 +414,7 @@ const DetailsOrderPage = () => {
 
                                                                                     {/* Items Table */}
                                                                                     {(detailsData?.order_details || []).map((item, index) => (
-                                                                                           <div className='border-b-2 border-gray-500 mt-4' key={index} >
+                                                                                           <div className='border-b-2 border-gray-500 mt-4' key={`${item.product_id}-${index}`} >
                                                                                                   <div className="text-center mb-2">
                                                                                                          <strong>Product Num({index + 1})</strong>
                                                                                                   </div>
@@ -438,7 +454,7 @@ const DetailsOrderPage = () => {
                                                                                                          </thead>
                                                                                                          <tbody>
                                                                                                                 {item.addons.map((itemAddons, indexAddons) => (
-                                                                                                                       <tr key={itemAddons.addon.id} className='border-b-2'>
+                                                                                                                       <tr key={`${itemAddons.addon.id}-${index}-${indexAddons}`} className='border-b-2'>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{indexAddons + 1}</td>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{itemAddons.addon.name}</td>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{itemAddons.addon.price}</td>
@@ -461,7 +477,7 @@ const DetailsOrderPage = () => {
                                                                                                          </thead>
                                                                                                          <tbody>
                                                                                                                 {item.excludes.map((itemExclude, indexExclude) => (
-                                                                                                                       <tr key={itemExclude.id} className='border-b-2'>
+                                                                                                                       <tr key={`${itemExclude.id}-${index}-${indexExclude}`} className='border-b-2'>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{indexExclude + 1}</td>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{itemExclude.name}</td>
                                                                                                                        </tr>
@@ -483,7 +499,7 @@ const DetailsOrderPage = () => {
                                                                                                          </thead>
                                                                                                          <tbody>
                                                                                                                 {item.extras.map((itemExtra, indexExtra) => (
-                                                                                                                       <tr key={itemExtra.id} className='border-b-2'>
+                                                                                                                       <tr key={`${itemExtra.id}-${index}-${indexExtra}`} className='border-b-2'>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{indexExtra + 1}</td>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{itemExtra.name}</td>
                                                                                                                               <td className="min-w-[80px] sm:min-w-[50px] sm:w-1/12 lg:w-1/12 py-2 text-center text-thirdColor text-sm sm:text-base lg:text-lg xl:text-xl overflow-hidden">{itemExtra.price}</td>
@@ -497,7 +513,7 @@ const DetailsOrderPage = () => {
                                                                                                          <strong>Variations Num({index + 1})</strong>
                                                                                                   </div>
                                                                                                   {item.variations.map((item, indexItem) => (
-                                                                                                         <div key={item.variation.id} className='border-b-2'>
+                                                                                                         <div key={`${item.variation.id}-${index}-${indexItem}`} className='border-b-2'>
 
                                                                                                                 <div className="text-center mb-2">
                                                                                                                        <strong>Variation({indexItem + 1})</strong>
@@ -526,7 +542,7 @@ const DetailsOrderPage = () => {
                                                                                                                 </table>
 
                                                                                                                 {item.options.map((option, indexOption) => (
-                                                                                                                       <div key={option.id}>
+                                                                                                                       <div key={`${option.id}-${index}-${indexItem}-${indexOption}`}>
 
                                                                                                                               <div className="text-center mb-2">
                                                                                                                                      <strong>Option({indexOption + 1})</strong>
@@ -724,7 +740,7 @@ const DetailsOrderPage = () => {
                                                                                                                        deliveriesFilter.map((delivery) => (
                                                                                                                               <div
                                                                                                                                      className="border-2 flex items-center justify-between border-gray-400 p-2 rounded-2xl"
-                                                                                                                                     key={delivery.id}
+                                                                                                                                     key={`${delivery.id}-${detailsData.id}`}
                                                                                                                               >
                                                                                                                                      <span className="font-TextFontRegular text-xl">
                                                                                                                                             {delivery?.f_name || '-'} {delivery?.l_name || '-'}

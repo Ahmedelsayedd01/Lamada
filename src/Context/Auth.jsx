@@ -8,8 +8,6 @@ import { removeUser, setUser } from '../Store/CreateSlices';
 const AuthContext = createContext(null);
 
 export const authSelector = (state) => state.userLamada || null;
-/*************  ✨ Codeium Command ⭐  *************/
-/******  cd120a16-cbab-42fb-b90f-2e706b0517f5  *******/
 export const ContextProvider = ({ children }) => {
   const [hideSidebar, setHideSidebar] = useState(() => {
     const savedState = localStorage.getItem('stateSidebar');
@@ -17,9 +15,12 @@ export const ContextProvider = ({ children }) => {
   });
 
   const dispatch = useDispatch();
-  const userStore = useSelector(authSelector);
+  const userStore = useSelector(state => state.userLamada);
 
-  const [userState, setUserState] = useState(userStore);
+  const [userState, setUserState] = useState(() => {
+    const userData = userStore ? userStore : null;
+    return userData;
+  });
 
   useEffect(() => {
     if (userState) {
@@ -71,4 +72,3 @@ export const useAuth = () => {
   }
   return context;
 };
-
