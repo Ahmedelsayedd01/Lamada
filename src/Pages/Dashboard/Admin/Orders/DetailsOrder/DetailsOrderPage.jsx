@@ -411,10 +411,7 @@ const DetailsOrderPage = () => {
                                                                </div>
 
 
-                                                               {/* Items Table */}2
-                                                               \][=-==-t]]
-
-                                                               xzsdsd
+                                                               {/* Items Table */}
                                                                {/* {(detailsData?.order_details || []).map((item, index) => (
                                                                       <div className='border-b-2 border-gray-500 mt-4' key={`${item.product_id}-${index}`} >
                                                                              <div className="text-center mb-2">
