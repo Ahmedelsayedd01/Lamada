@@ -571,196 +571,126 @@ const DetailsOrderPage = () => {
 {(detailsData?.order_details || []).map((order, orderIndex) => (
   <div
     key={`order-${orderIndex}`}
-    className="bg-white shadow-md rounded-lg p-6 my-6 border border-gray-200"
+    className="bg-white shadow-lg rounded-lg p-6 my-6 border border-gray-200"
   >
     {/* Order Header */}
-    <div className="flex justify-between items-center mb-6">
-      <h2 className="text-2xl font-bold text-gray-800">
-        Order #{orderIndex + 1}
-      </h2>
-      <span className="text-sm text-gray-500">
-        {order.product.length} product{order.product.length > 1 ? "s" : ""}
-      </span>
-    </div>
+    <h2 className="text-2xl font-bold text-gray-800 mb-4">
+      Order #{orderIndex + 1}
+    </h2>
 
-    {/* Products Section */}
-    <div className="mb-3">
-      <h3 className="text-xl font-semibold text-gray-700 border-b pb-2 mb-2">
-        Products
-      </h3>
-
-      <div className="w-full pb-5 flex items-start justify-start overflow-x-scroll scrollSection">
-      <table className="min-w-full text-sm text-gray-700 border border-gray-200 overflow-x-scroll scrollSection">
-        <thead className="bg-gray-100">
+    {/* Table wrapped in a horizontal scroll container */}
+    <div className="overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gradient-to-r from-[#9E090F] to-[#D1191C] text-white">
           <tr>
-            <th className="px-4 py-2 border">#</th>
-            <th className="px-4 py-2 border">Name</th>
-            <th className="px-4 py-2 border">Description</th>
-            <th className="px-4 py-2 border">Price</th>
-            <th className="px-4 py-2 border">Qty</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-gray-300">
+              Products
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-gray-300">
+              Addons
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-gray-300">
+              Excludes
+            </th>
+            {/* <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-gray-300">
+              Extras
+            </th> */}
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              Variations
+            </th>
           </tr>
         </thead>
-        <tbody>
-          {order.product.map((prod, prodIndex) => (
-            <tr key={`prod-${prodIndex}`} className="border-b">
-              <td className="px-4 py-2 text-center">{prodIndex + 1}</td>
-              <td className="px-4 py-2">{prod.product.name}</td>
-              <td className="px-4 py-2">{prod.product.description}</td>
-              <td className="px-4 py-2">{prod.product.price}</td>
-              <td className="px-4 py-2 text-center">{prod.count}</td>
-            </tr>
-          ))}
+        <tbody className="bg-white divide-y divide-gray-200">
+          <tr className="hover:bg-gray-50">
+            {/* Products Column: Name, Price, and Quantity */}
+            <td className="px-4 py-2 whitespace-normal border-r border-gray-300">
+              {order.product.map((prod, prodIndex) => (
+                <div key={`prod-${prodIndex}`} className="mb-3">
+                  <div className="font-semibold text-gray-800">
+                    {prod.product.name}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Price: {prod.product.price}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Qty: {prod.count}
+                  </div>
+                </div>
+              ))}
+            </td>
+
+            {/* Addons Column: Just Name */}
+            <td className="px-4 py-2 whitespace-normal border-r border-gray-300">
+              {order.addons && order.addons.length > 0 ? (
+                order.addons.map((addon, addonIndex) => (
+                  <div key={`addon-${addonIndex}`} className="mb-3">
+                    <div className="font-semibold text-gray-800">
+                      {addon.addon.name}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      Count: {addon.count || 0}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <span className="text-gray-500">-</span>
+              )}
+            </td>
+
+            {/* Excludes Column: Just Name */}
+            <td className="px-4 py-2 whitespace-normal border-r border-gray-300">
+              {order.excludes && order.excludes.length > 0 ? (
+                order.excludes.map((exclude, excludeIndex) => (
+                  <div key={`exclude-${excludeIndex}`} className="mb-3">
+                    <div className="font-semibold text-gray-800">
+                      {exclude.name}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <span className="text-gray-500">-</span>
+              )}
+            </td>
+
+            {/* Extras Column: Just Name */}
+            {/* <td className="px-6 py-4 whitespace-normal border-r border-gray-300">
+              {order.extras && order.extras.length > 0 ? (
+                order.extras.map((extra, extraIndex) => (
+                  <div key={`extra-${extraIndex}`} className="mb-3">
+                    <div className="font-semibold text-gray-800">
+                      {extra.name}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <span className="text-gray-500">-</span>
+              )}
+            </td> */}
+
+            {/* Variations Column: Name and Type */}
+            <td className="px-4 py-2 whitespace-normal">
+              {order.variations && order.variations.length > 0 ? (
+                order.variations.map((variation, varIndex) => (
+                  <div key={`variation-${varIndex}`} className="mb-3">
+                    <div className="font-semibold text-gray-800">
+                      {variation.variation.name}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      Type: {variation.variation.type}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <span className="text-gray-500">-</span>
+              )}
+            </td>
+          </tr>
         </tbody>
       </table>
-      </div>
     </div>
-
-    {/* Addons Section */}
-    {order.addons && order.addons.length > 0 && (
-      <div className="mb-3">
-        <h3 className="text-xl font-semibold text-gray-700 border-b pb-2 mb-2">
-          Addons
-        </h3>
-        <div className="w-full pb-5 flex items-start justify-start overflow-x-scroll scrollSection">
-        <table className="min-w-full text-sm text-gray-700 border border-gray-200 overflow-x-scroll scrollSection">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-2 border">#</th>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Price</th>
-              <th className="px-4 py-2 border">Qty</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.addons.map((addon, addonIndex) => (
-              <tr key={`addon-${addonIndex}`} className="border-b">
-                <td className="px-4 py-2 text-center">{addonIndex + 1}</td>
-                <td className="px-4 py-2">{addon.addon.name}</td>
-                <td className="px-4 py-2">{addon.addon.price}</td>
-                <td className="px-4 py-2 text-center">{addon.count}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
-      </div>
-    )}
-
-    {/* Excludes Section */}
-    {order.excludes && order.excludes.length > 0 && (
-      <div className="mb-3">
-        <h3 className="text-xl font-semibold text-gray-700 border-b pb-2 mb-2">
-          Excludes
-        </h3>
-        <div className="w-full pb-5 flex items-start justify-start overflow-x-scroll scrollSection">
-        <table className="min-w-full text-sm text-gray-700 border border-gray-200 overflow-x-scroll scrollSection">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-2 border">#</th>
-              <th className="px-4 py-2 border">Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.excludes.map((exclude, excludeIndex) => (
-              <tr key={`exclude-${excludeIndex}`} className="border-b">
-                <td className="px-4 py-2 text-center">{excludeIndex + 1}</td>
-                <td className="px-4 py-2">{exclude.name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
-      </div>
-    )}
-
-    {/* Extras Section */}
-    {order.extras && order.extras.length > 0 && (
-      <div className="mb-3">
-        <h3 className="text-xl font-semibold text-gray-700 border-b pb-2 mb-2">
-          Extras
-        </h3>
-        <div className="w-full pb-5 flex items-start justify-start overflow-x-scroll scrollSection">
-        <table className="min-w-full text-sm text-gray-700 border border-gray-200 overflow-x-scroll scrollSection">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-2 border">#</th>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.extras.map((extra, extraIndex) => (
-              <tr key={`extra-${extraIndex}`} className="border-b">
-                <td className="px-4 py-2 text-center">{extraIndex + 1}</td>
-                <td className="px-4 py-2">{extra.name}</td>
-                <td className="px-4 py-2">{extra.price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
-      </div>
-    )}
-
-    {/* Variations Section */}
-    {order.variations && order.variations.length > 0 && (
-      <div className="mb-3">
-        <h3 className="text-xl font-semibold text-gray-700 border-b pb-2 mb-2">
-          Variations
-        </h3>
-        {order.variations.map((variation, varIndex) => (
-          <div key={`variation-${varIndex}`} className="mb-4">
-            <div className="mb-2">
-              <p className="font-semibold text-gray-800">
-                {variation.variation.name}
-              </p>
-              {/* Variation badges */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-medium text-gray-700 bg-gray-200 rounded-full px-2 py-1">
-                  Type: {variation.variation.type}
-                </span>
-                <span className="text-xs font-medium text-green-700 bg-green-200 rounded-full px-2 py-1">
-                  Min: {variation.variation.min}
-                </span>
-                <span className="text-xs font-medium text-red-700 bg-red-200 rounded-full px-2 py-1">
-                  Max: {variation.variation.max}
-                </span>
-              </div>
-            </div>
-            <div className="w-full pb-5 flex items-start justify-start overflow-x-scroll scrollSection">
-            <table className="min-w-full text-sm text-gray-700 border border-gray-200 overflow-x-scroll scrollSection">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-4 py-2 border">#</th>
-                  <th className="px-4 py-2 border">Option Name</th>
-                  <th className="px-4 py-2 border">Price</th>
-                  <th className="px-4 py-2 border">Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                {variation.options.map((option, optionIndex) => (
-                  <tr
-                    key={`variation-${varIndex}-option-${optionIndex}`}
-                    className="border-b"
-                  >
-                    <td className="px-4 py-2 text-center">
-                      {optionIndex + 1}
-                    </td>
-                    <td className="px-4 py-2">{option.name || "-"}</td>
-                    <td className="px-4 py-2">{option.price || 0}</td>
-                    <td className="px-4 py-2">{option.Points || 0}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            </div>
-              
-          </div>
-        ))}
-      </div>
-    )}
   </div>
 ))}
+
 
                                                                {/* Order Summary */}
                                                                <div className="my-4 flex flex-col gap-y-1">
